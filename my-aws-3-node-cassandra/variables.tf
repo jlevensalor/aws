@@ -1,5 +1,5 @@
 variable "user_name" { default = "ubuntu" }
-variable "ssh_key_path" { default = "~/cassandra.pem" }
+variable "ssh_key_path" { default = "~/.ssh/cassandra.pem" }
 variable "ssh_key_name" { default = "cassandra" }
 variable "cidr" { default = "10.2.4.0/23" }
 variable "instance_type" { default = "t2.small" }

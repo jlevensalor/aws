@@ -6,7 +6,7 @@ resource "aws_instance" "cassandra_0" {
   subnet_id = "${aws_subnet.main.id}"
   vpc_security_group_ids = ["${module.cassandra_security_group.security_group_id}", "${aws_security_group.allow_internet_access.id}", "${aws_security_group.allow_all_ssh_access.id}"]
   depends_on = ["aws_internet_gateway.gw"]
-
+  user_data = "${file(var.cass_setup_file)}"
   tags {
     Name = "${var.user_name}_cassandra_0"
   }
@@ -32,6 +32,8 @@ resource "aws_instance" "cassandra_0" {
   }
 }
 
+
+
 resource "aws_instance" "cassandra_1" {
   instance_type = "${var.instance_type}"
   ami = "${var.ami}"
@@ -40,7 +42,7 @@ resource "aws_instance" "cassandra_1" {
   subnet_id = "${aws_subnet.main.id}"
   vpc_security_group_ids = ["${module.cassandra_security_group.security_group_id}", "${aws_security_group.allow_internet_access.id}", "${aws_security_group.allow_all_ssh_access.id}"]
   depends_on = ["aws_internet_gateway.gw", "aws_instance.cassandra_0"]
-
+  user_data = "${file(var.cass_setup_file)}"
   tags {
     Name = "${var.user_name}_cassandra_1"
   }
@@ -75,7 +77,7 @@ resource "aws_instance" "cassandra_2" {
   subnet_id = "${aws_subnet.main.id}"
   vpc_security_group_ids = ["${module.cassandra_security_group.security_group_id}", "${aws_security_group.allow_internet_access.id}", "${aws_security_group.allow_all_ssh_access.id}"]
   depends_on = ["aws_internet_gateway.gw", "aws_instance.cassandra_1"]
-
+  user_data = "${file(var.cass_setup_file)}"
   tags {
     Name = "${var.user_name}_cassandra_2"
   }

@@ -31,18 +31,6 @@ resource "aws_instance" "cassandra_0" {
     }
   }
 
-  provisioner "file" {
-    source = "provisioning/backup.bash"
-    destination = "/home/ubuntu/backup.bash"
-    connection {
-      type = "ssh"
-      user = "ubuntu"
-      private_key = "${file(var.ssh_key_path)}"
-    }
-  }
-}
-
-
 resource "aws_instance" "cassandra_1" {
   instance_type = "${var.instance_type}"
   ami = "${var.ami}"

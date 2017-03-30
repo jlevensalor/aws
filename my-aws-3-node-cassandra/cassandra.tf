@@ -30,6 +30,7 @@ resource "aws_instance" "cassandra_0" {
       private_key = "${file(var.ssh_key_path)}"
     }
   }
+}
 
 resource "aws_instance" "cassandra_1" {
   instance_type = "${var.instance_type}"
